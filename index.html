@@ -222,6 +222,25 @@
                 respostaBot =
                     "[EMERGÊNCIA VERMELHA] Dirija-se ao pronto-socorro. Custo: R$ 100,00";
 
+function processarTriagemIA(sintoma) {
+    let sintomaNormalizado = sintoma.toLowerCase();
+    let respostaBot = "";
+
+    // Ticket #101 - Hospital de Pronto-Socorro
+    if (
+        sintomaNormalizado.includes("dor no peito") ||
+        sintomaNormalizado.includes("falta de ar")
+    ) {
+        respostaBot =
+            "[EMERGÊNCIA VERMELHA] Dirija-se ao pronto-socorro. Custo: R$ 1500,00";
+    } else {
+        respostaBot =
+            "[TRIAGEM PADRÃO] Encaminhado para consulta geral. Valor: R$ 150,00";
+    }
+
+    return respostaBot;
+}
+
             // Ticket #102 - Convênio médico
             } else if (
                 sintomaNormalizado.includes("plano") ||
