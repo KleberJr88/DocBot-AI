@@ -205,6 +205,22 @@
 
     <script>
         // Processamento da triagem de sintomas
+        function processarTriagemIA(sintoma) {
+            const sintomaNormalizado = sintoma
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .toLowerCase();
+
+            let respostaBot = "";
+
+            // Ticket #101 - Emergência médica
+            // Esta regra tem prioridade sobre as demais.
+            if (
+                sintomaNormalizado.includes("dor no peito") ||
+                sintomaNormalizado.includes("falta de ar")
+            ) {
+                respostaBot =
+                    "[EMERGÊNCIA VERMELHA] Dirija-se ao pronto-socorro. Custo: R$ 100,00";
 
 function processarTriagemIA(sintoma) {
     let sintomaNormalizado = sintoma.toLowerCase();
@@ -224,7 +240,6 @@ function processarTriagemIA(sintoma) {
 
     return respostaBot;
 }
-
 
             // Ticket #102 - Convênio médico
             } else if (
